@@ -1,0 +1,160 @@
+$accent-color: #7a1fa2;
+
+* {
+	box-sizing: border-box;
+}
+
+body {
+	margin: 0;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	height: 100vh;
+	font-family: 'Montserrat', sans-serif;
+	background: #f4f6fb;
+}
+
+.wrapper {
+	display: flex;
+	flex-flow: row wrap;
+	justify-content: center;
+}
+
+.card {
+	width: 420px;
+	height: 340px;
+	margin: 1em;
+	perspective: 1500px;
+
+	.content {
+		position: relative;
+		width: 100%;
+		height: 100%;
+		transform-style: preserve-3d;
+		transition: transform 0.8s cubic-bezier(0.75, 0, 0.85, 1);
+	}
+}
+
+.more {
+	display: none;
+
+	&:checked ~ .content {
+		transform: rotateY(180deg);
+	}
+}
+
+.front,
+.back {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	backface-visibility: hidden;
+	transform-style: preserve-3d;
+	border-radius: 6px;
+
+	.inner {
+		height: 100%;
+		display: grid;
+		padding: 1.5em;
+		transform: translateZ(80px) scale(0.94);
+	}
+}
+
+.front {
+	background-size: cover;
+	background-position: center center;
+
+	&:after {
+		content: '';
+		position: absolute;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
+		display: block;
+		border-radius: 6px;
+		backface-visibility: hidden;
+		background: linear-gradient(
+			40deg,
+			rgba(0, 0, 0, 0.55),
+			rgba(0, 0, 0, 0.25)
+		);
+	}
+
+	.inner {
+		justify-content: space-between;
+	}
+
+	h2 {
+		text-transform: uppercase;
+		letter-spacing: 2px;
+		color: #fff;
+		font-weight: 600;
+	}
+}
+
+.back {
+	transform: rotateY(180deg);
+	background-color: #fff;
+	border: 2px solid rgb(240, 240, 240);
+
+	.inner {
+		grid-template-rows: auto 1fr auto auto auto;
+		color: $accent-color;
+	}
+
+	.description {
+		font-size: 0.9em;
+		font-weight: 600;
+		line-height: 1.4em;
+		overflow: auto;
+	}
+}
+
+.button {
+	text-transform: uppercase;
+	letter-spacing: 1px;
+	font-weight: 600;
+	cursor: pointer;
+	display: block;
+	padding: 0 1.5em;
+	height: 3em;
+	line-height: 2.9em;
+	background-color: transparent;
+	border: solid 2px #fff;
+	color: #fff;
+	border-radius: 4px;
+	text-align: center;
+	transition: 0.3s ease-in-out;
+
+	&:hover {
+		background-color: #fff;
+		color: $accent-color;
+	}
+
+	&.return {
+		color: $accent-color;
+		border-color: $accent-color;
+
+		&:hover {
+			background-color: $accent-color;
+			color: #fff;
+		}
+	}
+}
+
+::-webkit-scrollbar {
+	width: 5px;
+}
+::-webkit-scrollbar-track {
+	background: #f1f1f1;
+}
+::-webkit-scrollbar-thumb {
+	background: lighten($accent-color, 20%);
+}
+::-webkit-scrollbar-thumb:hover {
+	background: $accent-color;
+}
